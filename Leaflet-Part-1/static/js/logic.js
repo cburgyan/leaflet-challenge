@@ -40,17 +40,17 @@ function createMarkers(earthquakeData, myMap) {
     let legend = L.control({position: 'bottomright'});
     legend.onAdd = function() {
         let div = L.DomUtil.create('div', 'legend');
-        div.setAttribute('style', 'background-color: white; margin-left: 0px; padding: 0px 10px 0px 0px;');
+        div.setAttribute('style', 'background-color: white; margin-left: 0px; padding: 0px 10px 0px 0px; border-radius: 5px;');
         let labels = [];
 
         let legendHTMLString = "<ul style=\"list-style-type: none; padding-left: 10px;\">";
         for (let i = 0; i < depthColors.length; i++){
             if (i == 0){
-                legendHTMLString += `<li style=\"list-style-type: none;\"><span style=\"background-color: ${depthColors[i]};\">&emsp;</span> < 10</li>`;
+                legendHTMLString += `<li><span style=\"background-color: ${depthColors[i]};\">&emsp;</span> < 10</li>`;
             } else if (i == depthColors.length - 1){
-                legendHTMLString += `<li style=\"list-style-type: none;\"><span style=\"background-color: ${depthColors[i]};\">&emsp;</span> > 90</li>`;
+                legendHTMLString += `<li><span style=\"background-color: ${depthColors[i]};\">&emsp;</span> > 90</li>`;
             } else {
-                legendHTMLString += `<li style=\"list-style-type: none;\"><span style=\"background-color: ${depthColors[i]};\">&emsp;</span> ${i * 20 - 10}-${i * 20 + 10}</li>`;
+                legendHTMLString += `<li><span style=\"background-color: ${depthColors[i]};\">&emsp;</span> ${i * 20 - 10}-${i * 20 + 10}</li>`;
             }
         }
 
