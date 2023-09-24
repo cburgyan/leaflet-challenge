@@ -30,7 +30,7 @@ function createMarkers(earthquakeData, myMap) {
             weight: .3,
             fillColor: fillColor1,
             radius: magnitude * 10000
-        }).bindPopup("hi").addTo(myMap);
+        }).bindPopup(`<strong>Magnitude ${magnitude} -- ${feature.properties.place}</strong><br><hr>Latitude: ${latLng[0].toFixed(3)}, Longitude: ${latLng[1].toFixed(3)}<br>Time: ${new Date(feature.properties.time)}`).addTo(myMap);
     }
   
   }
@@ -56,7 +56,6 @@ function createMarkers(earthquakeData, myMap) {
 
         legendHTMLString += "</ul>";
         div.innerHTML = legendHTMLString;
-        // console.log(div.innerHTML);
         return div;
     }
 
