@@ -1,5 +1,5 @@
 
-// URL to retrieve Earthquake data
+// URL to retrieve earthquake data
 let url = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson';
 
 // Colors for different earthquake depths
