@@ -40,12 +40,12 @@ function createMarkers(earthquakeData, myMap) {
         
         // Create marker, add popup info describing the earthquake event associeated with the
         // marker, and add the marker to the map.
-        L.circle(latLng, {
+        L.circleMarker(latLng, {
             fillOpacity: 0.75,
             color: 'black',
             weight: .3,
             fillColor: fillColor1,
-            radius: magnitude * 10000
+            radius: magnitude * 2 
         }).bindPopup(`<strong>Magnitude ${magnitude} -- ${place}</strong><br><hr>Latitude: ${latLng[0].toFixed(3)}, Longitude: ${latLng[1].toFixed(3)}<br>Depth: ${depth.toFixed(2)} km<br>Time: ${new Date(time)}`).addTo(myMap);
     }
   
