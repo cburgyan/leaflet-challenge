@@ -46,7 +46,7 @@ function createMarkers(earthquakeData, myMap) {
             weight: .3,
             fillColor: fillColor1,
             radius: magnitude * 10000
-        }).bindPopup(`<strong>Magnitude ${magnitude} -- ${place}</strong><br><hr>Latitude: ${latLng[0].toFixed(3)}, Longitude: ${latLng[1].toFixed(3)}<br>Time: ${new Date(time)}`).addTo(myMap);
+        }).bindPopup(`<strong>Magnitude ${magnitude} -- ${place}</strong><br><hr>Latitude: ${latLng[0].toFixed(3)}, Longitude: ${latLng[1].toFixed(3)}<br>Depth: ${depth.toFixed(2)} km<br>Time: ${new Date(time)}`).addTo(myMap);
     }
   
   }
