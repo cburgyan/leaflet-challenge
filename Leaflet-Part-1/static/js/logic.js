@@ -10,45 +10,16 @@ const depthColors = ['#8f0', '#ee0', '#eb0', '#e80', '#b60', '#a00'];
 // of data points passed in as the first argument and then, these markers are added to 
 // the map passed in as the second argument.
 function createMarkers(earthquakeData, myMap) {
-    // Cycle through the array of earthquake data points, make a marker for it and add the
-    // marker to the map.
-    // for (let i = 0; i < earthquakeData.features.length; i++){
 
-    //     // Initialize variables for greater readability
-    //     let feature = earthquakeData.features[i];
-    //     let depth = feature.geometry.coordinates[2];
-    //     let latLng = [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
-    //     let magnitude = feature.properties.mag;
-    //     let place = feature.properties.place;
-    //     let time = feature.properties.time;
-
-    //     // Assign color of marker that corresponds to earthquake depth.
-    //     let fillColor1 = "";
-    //     if (depth > 90){
-    //         fillColor1 = depthColors[5];
-    //     } else if (depth > 70){
-    //         fillColor1 = depthColors[4];
-    //     } else if (depth > 50){
-    //         fillColor1 = depthColors[3];
-    //     } else if (depth > 30){
-    //         fillColor1 = depthColors[2];
-    //     } else if (depth > 10){
-    //         fillColor1 = depthColors[1];
-    //     } else {
-    //         fillColor1 = depthColors[0];
-    //     }
-        
-    //     // Create marker, add popup info describing the earthquake event associeated with the
-    //     // marker, and add the marker to the map.
-    //     L.circleMarker(latLng, {
-    //         fillOpacity: 0.75,
-    //         color: 'black',
-    //         weight: .3,
-    //         fillColor: fillColor1,
-    //         radius: magnitude * 2 
-    //     }).bindPopup(`<strong>Magnitude ${magnitude} -- ${place}</strong><br><hr>Latitude: ${latLng[0].toFixed(3)}, Longitude: ${latLng[1].toFixed(3)}<br>Depth: ${depth.toFixed(2)} km<br>Time: ${new Date(time)}`).addTo(myMap);
-    // }
+    // Create a geoJSON layer to add markers to map.
     L.geoJSON(earthquakeData.features, {
+
+        // Use the pointToLayer option of a geoJSON layer to create a 
+        // circleMarker with a radius that's proportional to the 
+        // magnitude of the earthquake and has a color that corresponds 
+        // to a particular depth range (in km). (It also sets an 
+        // opacity, fillOpacity, and wieght that are constant across 
+        // all markers).
         pointToLayer: function(feature, latlng){
             let depth = feature.geometry.coordinates[2];
             let magnitude = feature.properties.mag;
@@ -78,7 +49,11 @@ function createMarkers(earthquakeData, myMap) {
             };
             return L.circleMarker(latlng, markerOptions);
         },
-        
+
+        // Use the onEachFeature option of a geoJSON layer to bind a
+        // popup tag/box for each marker that displays the information
+        // specific to that marker such as maginitude, depth, location,
+        // place, and time.
         onEachFeature: function(feature, layer){
             let depth = feature.geometry.coordinates[2];
             let latLng = [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
