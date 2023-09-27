@@ -10,7 +10,7 @@
 
 ## A Visualization Tool
 In this project, a visualizaiton tool was developed to "better educate the public and other organizations" on the dangers that face our planet upon request* by the United States Geological Survey (USGS).<br>
-This visualization shows the earthquakes within the last week where the size of each point on the map indicates the magnitude of the earthquake and the color corresponds to the depth of the earthquake.
+This visualization shows earthquakes from around the world within the last week where the size of each point on the map indicates the magnitude of the earthquake and the color corresponds to the depth of the earthquake.
 
 *<sub font=6>A fictional request.</sub>
 
