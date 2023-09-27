@@ -12,43 +12,82 @@ const depthColors = ['#8f0', '#ee0', '#eb0', '#e80', '#b60', '#a00'];
 function createMarkers(earthquakeData, myMap) {
     // Cycle through the array of earthquake data points, make a marker for it and add the
     // marker to the map.
-    for (let i = 0; i < earthquakeData.features.length; i++){
+    // for (let i = 0; i < earthquakeData.features.length; i++){
 
-        // Initialize variables for greater readability
-        let feature = earthquakeData.features[i];
-        let depth = feature.geometry.coordinates[2];
-        let latLng = [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
-        let magnitude = feature.properties.mag;
-        let place = feature.properties.place;
-        let time = feature.properties.time;
+    //     // Initialize variables for greater readability
+    //     let feature = earthquakeData.features[i];
+    //     let depth = feature.geometry.coordinates[2];
+    //     let latLng = [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
+    //     let magnitude = feature.properties.mag;
+    //     let place = feature.properties.place;
+    //     let time = feature.properties.time;
 
-        // Assign color of marker that corresponds to earthquake depth.
-        let fillColor1 = "";
-        if (depth > 90){
-            fillColor1 = depthColors[5];
-        } else if (depth > 70){
-            fillColor1 = depthColors[4];
-        } else if (depth > 50){
-            fillColor1 = depthColors[3];
-        } else if (depth > 30){
-            fillColor1 = depthColors[2];
-        } else if (depth > 10){
-            fillColor1 = depthColors[1];
-        } else {
-            fillColor1 = depthColors[0];
-        }
+    //     // Assign color of marker that corresponds to earthquake depth.
+    //     let fillColor1 = "";
+    //     if (depth > 90){
+    //         fillColor1 = depthColors[5];
+    //     } else if (depth > 70){
+    //         fillColor1 = depthColors[4];
+    //     } else if (depth > 50){
+    //         fillColor1 = depthColors[3];
+    //     } else if (depth > 30){
+    //         fillColor1 = depthColors[2];
+    //     } else if (depth > 10){
+    //         fillColor1 = depthColors[1];
+    //     } else {
+    //         fillColor1 = depthColors[0];
+    //     }
         
-        // Create marker, add popup info describing the earthquake event associeated with the
-        // marker, and add the marker to the map.
-        L.circleMarker(latLng, {
-            fillOpacity: 0.75,
-            color: 'black',
-            weight: .3,
-            fillColor: fillColor1,
-            radius: magnitude * 2 
-        }).bindPopup(`<strong>Magnitude ${magnitude} -- ${place}</strong><br><hr>Latitude: ${latLng[0].toFixed(3)}, Longitude: ${latLng[1].toFixed(3)}<br>Depth: ${depth.toFixed(2)} km<br>Time: ${new Date(time)}`).addTo(myMap);
-    }
-  
+    //     // Create marker, add popup info describing the earthquake event associeated with the
+    //     // marker, and add the marker to the map.
+    //     L.circleMarker(latLng, {
+    //         fillOpacity: 0.75,
+    //         color: 'black',
+    //         weight: .3,
+    //         fillColor: fillColor1,
+    //         radius: magnitude * 2 
+    //     }).bindPopup(`<strong>Magnitude ${magnitude} -- ${place}</strong><br><hr>Latitude: ${latLng[0].toFixed(3)}, Longitude: ${latLng[1].toFixed(3)}<br>Depth: ${depth.toFixed(2)} km<br>Time: ${new Date(time)}`).addTo(myMap);
+    // }
+    L.geoJSON(earthquakeData.features, {
+        pointToLayer: function(feature, latlng){
+            let depth = feature.geometry.coordinates[2];
+            let magnitude = feature.properties.mag;
+
+            let fillColor1 = "";
+            if (depth > 90){
+                fillColor1 = depthColors[5];
+            } else if (depth > 70){
+                fillColor1 = depthColors[4];
+            } else if (depth > 50){
+                fillColor1 = depthColors[3];
+            } else if (depth > 30){
+                fillColor1 = depthColors[2];
+            } else if (depth > 10){
+                fillColor1 = depthColors[1];
+            } else {
+                fillColor1 = depthColors[0];
+            }
+            
+            markerOptions = {
+                opacity: 1,
+                fillOpacity: 0.65,
+                color: 'black',
+                weight: .3,
+                fillColor: fillColor1,
+                radius: magnitude * 3 
+            };
+            return L.circleMarker(latlng, markerOptions);
+        },
+        
+        onEachFeature: function(feature, layer){
+            let depth = feature.geometry.coordinates[2];
+            let latLng = [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
+            let magnitude = feature.properties.mag;
+            let place = feature.properties.place;
+            let time = feature.properties.time;
+            layer.bindPopup(`<strong>Magnitude ${magnitude} -- ${place}</strong><br><hr>Latitude: ${latLng[0].toFixed(3)}, Longitude: ${latLng[1].toFixed(3)}<br>Depth: ${depth.toFixed(2)} km<br>Time: ${new Date(time)}`).addTo(myMap);
+        }
+    }).addTo(myMap);
   }
 
 
