@@ -91,7 +91,7 @@ function createMarkers(earthquakeData, myMap) {
             if (i == 0){
                 legendHTMLString += `<li><span style=\"background-color: ${depthColors[i]};\">&emsp;</span> < 10</li>`;
             } else if (i == depthColors.length - 1){
-                legendHTMLString += `<li><span style=\"background-color: ${depthColors[i]};\">&emsp;</span> > 90</li>`;
+                legendHTMLString += `<li><span style=\"background-color: ${depthColors[i]};\">&emsp;</span> 90+</li>`;
             } else {
                 legendHTMLString += `<li><span style=\"background-color: ${depthColors[i]};\">&emsp;</span> ${i * 20 - 10}-${i * 20 + 10}</li>`;
             }
